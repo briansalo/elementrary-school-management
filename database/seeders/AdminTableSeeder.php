@@ -18,10 +18,9 @@ class AdminTableSeeder extends Seeder
 
             DB::table('users')->delete();
             $user = array(
-                array('id' => 1,'name'=>'admin', 'usertype'=>'Admin', 'email'=>'admin@admin.com', 'email_verified_at'=> now(),
-            'password'=> bcrypt('adminadmin') ),
+                array('id' => 1, 'usertype'=>'Admin', 'name'=>'admin',  'email'=>'admin@admin.com', 'email_verified_at'=> now(), 'password'=> bcrypt('adminadmin') ),
                 
-                array('id' => 2, 'name'=>'operator', 'usertype'=>'Operator', 'email'=>'operator@operator.com', 'email_verified_at'=> now(), 'password'=> bcrypt('operatoroperator')),
+                array('id' => 2, 'usertype'=>'Operator', 'name'=>'operator',  'email'=>'operator@operator.com', 'email_verified_at'=> now(), 'password'=> bcrypt('operatoroperator')),
 
                 );
                 DB::table('users')->insert($user);
