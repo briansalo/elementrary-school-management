@@ -157,7 +157,6 @@
 													<tr>
 														<th width="10%">ID NO.</th>
 														<th width="20%">Name</th>
-														<th width="10%">grade</th>
 														<th width="10%">Fee Amount</th>
 														<th width="10%">Discount</th>
 														<th width="10%">Total Amount</th>

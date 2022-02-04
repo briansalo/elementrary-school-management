@@ -59,7 +59,6 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$total.'</td>
@@ -141,7 +140,6 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$row->amount.'</td>
@@ -206,7 +204,6 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$row->amount.'</td>
@@ -305,7 +302,6 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$total.'</td>
@@ -360,7 +356,6 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$total.'</td>
@@ -402,7 +397,6 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$row->amount.'</td>
@@ -436,7 +430,6 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$row->amount.'</td>

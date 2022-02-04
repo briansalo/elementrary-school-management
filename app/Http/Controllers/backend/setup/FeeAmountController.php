@@ -8,6 +8,8 @@ use App\Models\FeeCategoryAmount;
 use App\Models\StudentClass;
 use App\Models\StudentFee;
 
+use App\Models\StudentPayment;
+
 
 class FeeAmountController extends Controller
 {
@@ -45,7 +47,7 @@ class FeeAmountController extends Controller
 
 
     public function EditFeeAmount($id){
-     
+
         $data['editdata'] = FeeCategoryAmount::where('student_fee_id', $id)->orderBy('class_id','asc')->get();
        $data['fee_categories'] = StudentFee::where('id', $id)->get();
         $data['classes'] = StudentClass::all();
@@ -70,6 +72,16 @@ class FeeAmountController extends Controller
             'message' => 'Fee Amount Inserted Successfully',
             'alert-type' => 'success'  //success variable came from admin.blade.php in java script toastr
         );
+
+        //update also the amount in studentpayments table
+        $allfee = FeeCategoryAmount::all();
+        foreach($allfee as $row){
+            StudentPayment::where('fee_category_id', $row->student_fee_id)
+            ->where('class_id', $row->class_id)
+            ->update(['amount'=>$row->amount]);
+
+        }
+
         return redirect()->route('category.amount.view')->with($notification);
 
 
