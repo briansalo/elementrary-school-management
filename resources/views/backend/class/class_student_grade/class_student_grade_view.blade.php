@@ -91,9 +91,9 @@
 																		@foreach($subjects as $number => $subject)
 																		<input type="hidden" name="subject{{$key}}[]" value="{{$subject->school_subject->name}}">
 																			@if(empty($first[$key][$number]))
-																				<td><input type="text" class="form-control form-control-sm" name="grade{{$key}}[]"></td>				
+																				<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]"></td>				
 																			@else
-																			<td><input type="text"class="form-control form-control-sm" name="grade{{$key}}[]" value="{{$first[$key][$number]->grade}}"></td>
+																			<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]" value="{{$first[$key][$number]->grade}}"></td>
 																			@endif
 																		@endforeach
 
@@ -139,9 +139,9 @@
 																		@foreach($subjects as $number => $subject)
 																		<input type="hidden" name="subject{{$key}}[]" value="{{$subject->school_subject->name}}">
 																			@if(empty($second[$key][$number]))
-																				<td><input type="text" class="form-control form-control-sm" name="grade{{$key}}[]"></td>
+																				<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]"></td>
 																			@else
-																				<td><input type="text" class="form-control form-control-sm" name="grade{{$key}}[]" value="{{$second[$key][$number]->grade}}"></td>																			
+																				<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]" value="{{$second[$key][$number]->grade}}"></td>																			
 																			@endif
 																		@endforeach
 
@@ -188,9 +188,9 @@
 																		@foreach($subjects as $number => $subject)
 																		<input type="hidden" name="subject{{$key}}[]" value="{{$subject->school_subject->name}}">
 																			@if(empty($third[$key][$number]))
-																				<td><input type="text" class="form-control form-control-sm" name="grade{{$key}}[]"></td>
+																				<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]"></td>
 																			@else
-																				<td><input type="text" class="form-control form-control-sm" name="grade{{$key}}[]" value="{{$third[$key][$number]->grade}}"></td>																			
+																				<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]" value="{{$third[$key][$number]->grade}}"></td>																			
 																			@endif
 																		@endforeach
 
@@ -240,9 +240,9 @@
 																		@foreach($subjects as $number => $subject)
 																		<input type="hidden" name="subject{{$key}}[]" value="{{$subject->school_subject->name}}">
 																			@if(empty($fourth[$key][$number]))
-																				<td><input type="text" class="form-control form-control-sm" name="grade{{$key}}[]"></td>
+																				<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]"></td>
 																			@else
-																				<td><input type="text" class="form-control form-control-sm" name="grade{{$key}}[]" value="{{$fourth[$key][$number]->grade}}"></td>																			
+																				<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]" value="{{$fourth[$key][$number]->grade}}"></td>																			
 																			@endif
 																		@endforeach
 
