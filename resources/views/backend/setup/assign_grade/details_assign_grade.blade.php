@@ -30,7 +30,6 @@
 								<th width="25%">subject</th>
 								<th width="15%">full_mark</th>
 								<th width="15%">pass_mark</th>
-								<th width="15%">subjective_mark</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -102,7 +101,6 @@
 								<th width="25%">subject</th>
 								<th width="15%">full_mark</th>
 								<th width="15%">pass_mark</th>
-								<th width="15%">subjective_mark</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -112,7 +110,6 @@
 								<td>{{ $newtry['school_subject']['name']}}</td>
 								<td>{{ $newtry->full_mark}}</td>
 								<td>{{ $newtry->pass_mark}}</td>
-								<td>{{ $newtry->subjective_mark}}</td>
 								
 							</tr>
 							@endforeach

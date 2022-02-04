@@ -127,7 +127,6 @@ class AssignGradeController extends Controller
                 $assign_grade->subject_id = $request->subject[$i];
                 $assign_grade->full_mark = $request->full_mark[$i];
                 $assign_grade->pass_mark = $request->pass_mark[$i];
-                $assign_grade->subjective_mark = $request->subjective_mark[$i];
                 $assign_grade->save();
             }//end for loop
         $notification = array(
