@@ -45,6 +45,7 @@ class FeeAmountController extends Controller
 
 
     public function EditFeeAmount($id){
+     
         $data['editdata'] = FeeCategoryAmount::where('student_fee_id', $id)->orderBy('class_id','asc')->get();
        $data['fee_categories'] = StudentFee::where('id', $id)->get();
         $data['classes'] = StudentClass::all();

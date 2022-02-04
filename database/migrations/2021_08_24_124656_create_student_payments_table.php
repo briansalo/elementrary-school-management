@@ -17,7 +17,7 @@ class CreateStudentPaymentsTable extends Migration
             $table->id();
             $table->integer('student_id')->comment('user_id=student_id');
             $table->integer('fee_category_id')->nullable();
-            $table->integer('year_id')->nullable();
+            $table->integer('grade_id')->nullable();
             $table->integer('class_id')->nullable();
             $table->double('discount')->nullable();
             $table->double('amount')->nullable();

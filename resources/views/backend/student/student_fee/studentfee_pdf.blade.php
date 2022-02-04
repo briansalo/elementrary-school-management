@@ -84,7 +84,7 @@
   <tr>
     <td>4</td>
     <td><b>Session</b></td>
-    <td>{{ $details['student_year']['name'] }}</td>
+    <td>{{ $details['student_grade']['name'] }}</td>
   </tr>
   <tr>
     <td>5</td>
@@ -154,7 +154,7 @@
   <tr>
     <td>4</td>
     <td><b>Session</b></td>
-    <td>{{ $details['student_year']['name'] }}</td>
+    <td>{{ $details['student_grade']['name'] }}</td>
   </tr>
   <tr>
     <td>5</td>

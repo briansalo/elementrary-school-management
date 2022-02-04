@@ -43,12 +43,12 @@
 
 														<div class="col-md-3">
 															 	<div class="form-group">
-																	<h5>Year <span class="text-danger"> </span></h5>
+																	<h5>Grade <span class="text-danger"> </span></h5>
 																	<div class="controls">
-																 			<select name="year" id="year" required="" class="form-control">
-																					<option value="" selected="" disabled="">Select Year</option>
-																					 @foreach($years as $year)
-																	 					<option value="{{ $year->id }}" >{{ $year->name }}</option>
+																 			<select name="grade" id="grade" required="" class="form-control">
+																					<option value="" selected="" disabled="">Select Grade</option>
+																					 @foreach($grades as $grade)
+																	 					<option value="{{ $grade->id }}" >{{ $grade->name }}</option>
 																			 			@endforeach
 																		 </select>
 																  </div>		 
@@ -157,7 +157,7 @@
 													<tr>
 														<th width="10%">ID NO.</th>
 														<th width="20%">Name</th>
-														<th width="10%">Year</th>
+														<th width="10%">grade</th>
 														<th width="10%">Fee Amount</th>
 														<th width="10%">Discount</th>
 														<th width="10%">Total Amount</th>
@@ -208,7 +208,7 @@
   $(document).on('click','#search',function(){
 
 
-    var year = $('#year').val();
+    var grade = $('#grade').val();
     var class_id = $('#class_id').val();
     var selectfee = $('#selectfee').val();
 
@@ -219,7 +219,7 @@
      var exam_id = $('#exam_id').val();
 
   	   // condition to make sure all field is not null
-  	   if(selectfee== null || class_id == null || year== null){
+  	   if(selectfee== null || class_id == null || grade== null){
   	   	window.alert("please fill in all the field");
   	   }
   	 
@@ -232,9 +232,9 @@
     		$('#payment_name').text("Registration Fee");
 
 					   	 $.ajax({
-	  							url: "{{ route('registration_fee.year.fee.class.search')}}",
+	  							url: "{{ route('registration_fee.grade.fee.class.search')}}",
 	   								method:'GET',
-	   								data:{'year':year,'class_id':class_id,'selectfee':selectfee},
+	   								data:{'grade':grade,'class_id':class_id,'selectfee':selectfee},
 	  								 dataType:'json',
 	  								 success:function(data){
 
@@ -262,9 +262,9 @@
 				$('#payment_name').text("Monthly Fee");
 
 					   	 $.ajax({
-	  							url: "{{ route('monthly_fee.year.fee.class.search')}}",
+	  							url: "{{ route('monthly_fee.grade.fee.class.search')}}",
 	   								method:'GET',
-	   								data:{'year':year,'class_id':class_id,'selectfee':selectfee,'month_id':month_id},
+	   								data:{'grade':grade,'class_id':class_id,'selectfee':selectfee,'month_id':month_id},
 	  								 dataType:'json',
 	  								 success:function(data){
 
@@ -288,9 +288,9 @@
 					$('#payment_name').text("Exam Fee");
 
 					   	 $.ajax({
-	  							url: "{{ route('exam_fee.year.fee.class.search')}}",
+	  							url: "{{ route('exam_fee.grade.fee.class.search')}}",
 	   								method:'GET',
-	   								data:{'year':year,'class_id':class_id,'selectfee':selectfee,'exam_id':exam_id},
+	   								data:{'grade':grade,'class_id':class_id,'selectfee':selectfee,'exam_id':exam_id},
 	  								 dataType:'json',
 	  								 success:function(data){
 
@@ -348,7 +348,7 @@ $("#selectfee").trigger("change");
  $('#search_name').on('keyup', function(){
  	  		query = $(this).val();
  	   	
- 	  	   var year = $('#year').val();
+ 	  	   var grade = $('#grade').val();
     
     var selectfee = $('#selectfee').val();
 
@@ -360,7 +360,7 @@ $("#selectfee").trigger("change");
    	 $.ajax({
    url:"{{ route('live_search.action') }}",
    method:'GET',
-   data:{'year':year,'class_id':class_id,'selectfee':selectfee,'query':query,'month_id':month_id,'exam_id':exam_id},
+   data:{'grade':grade,'class_id':class_id,'selectfee':selectfee,'query':query,'month_id':month_id,'exam_id':exam_id},
    dataType:'json',
    success:function(alldata)
    {

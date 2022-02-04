@@ -18,19 +18,19 @@
 
 				  <div class="box-body">
 
-				  	<!-- I use get method because i just want to retrieve data in student year and student class -->
-				  	<form method="GET" action="{{ route('student.year.class.search') }}">
+				  	<!-- I use get method because i just want to retrieve data in student grade and student class -->
+				  	<form method="GET" action="{{ route('student.grade.class.search') }}">
 				  		<div class="row">
 
 										<div class="col-md-4">
 													<div class="form-group">
-														<h5>Year <span class="text-danger">*</span></h5>
+														<h5>Grade <span class="text-danger">*</span></h5>
 														<div class="controls">
-															<select name="year"  required="" class="form-control" aria-invalid="false">
-																<option value="">Select Year</option> 
-																@foreach($year as $years)
+															<select name="grade"  required="" class="form-control" aria-invalid="false">
+																<option value="">Select Grade</option> 
+																@foreach($grade as $grades)
 																													<!-- the @$year_id came from studentRegistrationController -->
-																<option value="{{$years->id}}" {{ (@$year_id == $years->id)? "selected": "" }} > {{$years->name}} </option>
+																<option value="{{$grades->id}}" {{ (@$grade_id == $grades->id)? "selected": "" }} > {{$grades->name}} </option>
 																@endforeach
 															</select>
 														<div class="help-block"></div></div>
@@ -80,7 +80,7 @@
 								<th>ID NO.</th>
 								<th>Name</th>
 								<!--<th>Image</th>-->
-								<th>Year</th>
+
 								<th>Class</th>
 								<th>Grade</th>
 								<th>Action</th>
@@ -97,7 +97,7 @@
 								  <img id="showimage" src="{{ (!empty($student['student']['image']))? url('upload/student_images/'.$student['student']['image']): url('upload/no_image.jpg')}}" alt="User Avatar" style="width:80px; width: 80px;">
 								</td>
 								-->
-								<td>{{ $student['student_year']['name'] }}</td>
+
 								<td>{{ $student['student_class']['name'] }}</td> 
 								<td>{{ $student->student_grade->name }}</td> 
 								<td>

@@ -16,6 +16,7 @@ use App\Models\StudentShift;
 use App\Models\FeeCategoryAmount;
 use App\Models\StudentFee;
 use App\Models\StudentPayment;
+use App\Models\StudentGrade;
 
 use DB;
 use PDF;
@@ -25,7 +26,7 @@ class StudentFeeAmountController extends Controller
 
     public function StudentFeeAmountView(){
 
-        $data['years'] = StudentYear::all();
+        $data['grades'] = StudentGrade::all();
         $data['classes'] = StudentClass::all();
         $data['fees'] = StudentFee::all();
 
@@ -40,7 +41,7 @@ class StudentFeeAmountController extends Controller
            $output[] = '';
 
             $alldata = StudentPayment::where('class_id', $request->class_id)
-            ->where('year_id', $request->year)
+            ->where('grade_id', $request->grade)
             ->where('fee_category_id', $request->selectfee)
             ->get();
 
@@ -58,12 +59,12 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_year->name.'</td>
+                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$total.'</td>
                         <td>
-                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&year='.$row->year_id.'&class='.$row->class_id.'"> Fee Slip</a>
+                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'"> Fee Slip</a>
 
                         </td>
                     </tr>
@@ -90,7 +91,7 @@ class StudentFeeAmountController extends Controller
         
         $data['details'] = StudentPayment::where('student_id',$request->student_id)
         ->where('fee_category_id', $request->fee_category_id)
-        ->where('year_id', $request->year)
+        ->where('grade_id', $request->grade)
         ->where('class_id', $request->class)
         ->first();
 
@@ -98,7 +99,7 @@ class StudentFeeAmountController extends Controller
             // computation for discount
         $dataDiscount = StudentPayment::where('student_id',$request->student_id)
         ->where('fee_category_id', $request->fee_category_id)
-        ->where('year_id', $request->year)
+        ->where('grade_id', $request->grade)
         ->where('class_id', $request->class)
         ->first();
                         //computation of discount
@@ -128,7 +129,7 @@ class StudentFeeAmountController extends Controller
            $output[] = '';
 
             $alldata = StudentPayment::where('class_id', $request->class_id)
-            ->where('year_id', $request->year)
+            ->where('grade_id', $request->grade)
             ->where('fee_category_id', $request->selectfee)
             ->get();
 
@@ -140,12 +141,12 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_year->name.'</td>
+                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>
-                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("monthly.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&year='.$row->year_id.'&class='.$row->class_id.'&month='.$request->month_id.'"> Fee Slip</a>
+                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("monthly.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'&month='.$request->month_id.'"> Fee Slip</a>
 
                         </td>
                     </tr>
@@ -172,7 +173,7 @@ class StudentFeeAmountController extends Controller
         
         $data['details'] = StudentPayment::where('student_id',$request->student_id)
         ->where('fee_category_id', $request->fee_category_id)
-        ->where('year_id', $request->year)
+        ->where('grade_id', $request->grade)
         ->where('class_id', $request->class)
         ->first();
         
@@ -193,7 +194,7 @@ class StudentFeeAmountController extends Controller
            $output[] = '';
 
             $alldata = StudentPayment::where('class_id', $request->class_id)
-            ->where('year_id', $request->year)
+            ->where('grade_id', $request->grade)
             ->where('fee_category_id', $request->selectfee)
             ->get();
 
@@ -205,12 +206,12 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_year->name.'</td>
+                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>
-                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("exam.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&year='.$row->year_id.'&class='.$row->class_id.'&exam='.$request->exam_id.'"> Fee Slip</a>
+                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("exam.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'&exam='.$request->exam_id.'"> Fee Slip</a>
 
                         </td>
                     </tr>
@@ -241,7 +242,7 @@ class StudentFeeAmountController extends Controller
         
         $data['details'] = StudentPayment::where('student_id',$request->student_id)
         ->where('fee_category_id', $request->fee_category_id)
-        ->where('year_id', $request->year)
+        ->where('grade_id', $request->grade)
         ->where('class_id', $request->class)
         ->first();
         
@@ -283,7 +284,7 @@ class StudentFeeAmountController extends Controller
 
                 $alldata = StudentPayment::where('student_id',$data->id)
                     ->where('class_id', $request->class_id)
-                    ->where('year_id', $request->year)
+                    ->where('grade_id', $request->grade)
                     ->where('fee_category_id', $request->selectfee)
                     ->get();
 
@@ -304,12 +305,12 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_year->name.'</td>
+                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$total.'</td>
                         <td>
-                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&year='.$row->year_id.'&class='.$row->class_id.'"> Fee Slip</a>
+                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'"> Fee Slip</a>
 
                         </td>
 
@@ -337,7 +338,7 @@ class StudentFeeAmountController extends Controller
 
                 $alldata = StudentPayment::where('student_id',$data->id)
                     ->where('class_id', $request->class_id)
-                    ->where('year_id', $request->year)
+                    ->where('grade_id', $request->grade)
                     ->where('fee_category_id', $request->selectfee)
                     ->get();
 
@@ -359,12 +360,12 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_year->name.'</td>
+                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$total.'</td>
                         <td>
-                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&year='.$row->year_id.'&class='.$row->class_id.'"> Fee Slip</a>
+                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'"> Fee Slip</a>
 
                         </td>             
 
@@ -389,7 +390,7 @@ class StudentFeeAmountController extends Controller
 
                 $alldata = StudentPayment::where('student_id',$data->id)
                     ->where('class_id', $request->class_id)
-                    ->where('year_id', $request->year)
+                    ->where('grade_id', $request->grade)
                     ->where('fee_category_id', $request->selectfee)
                     ->get();
 
@@ -401,12 +402,12 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_year->name.'</td>
+                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>
-                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("live_search.month_exam.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&year='.$row->year_id.'&class='.$row->class_id.'&month='.$request->month_id.'&exam='.$request->exam_id.'"> Fee Slip</a>
+                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("live_search.month_exam.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'&month='.$request->month_id.'&exam='.$request->exam_id.'"> Fee Slip</a>
 
                         </td>
                     </tr>
@@ -419,9 +420,9 @@ class StudentFeeAmountController extends Controller
 
 
             }else if($query == ''){
-                $alldata = StudentPayment::with(['student','student_year'])
+                $alldata = StudentPayment::with(['student','student_grade'])
                     ->where('class_id', $request->class_id)
-                    ->where('year_id', $request->year)
+                    ->where('grade_id', $request->grade)
                     ->where('fee_category_id', $request->selectfee)
                     ->get();
 
@@ -435,12 +436,12 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.$row->student_year->name.'</td>
+                        <td>'.$row->student_grade->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>
-                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("live_search.month_exam.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&year='.$row->year_id.'&class='.$row->class_id.'&month='.$request->month_id.'&exam='.$request->exam_id.'"> Fee Slip</a>
+                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("live_search.month_exam.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'&month='.$request->month_id.'&exam='.$request->exam_id.'"> Fee Slip</a>
                     
 
                     </tr>
@@ -474,7 +475,7 @@ class StudentFeeAmountController extends Controller
         
         $data['details'] = StudentPayment::where('student_id',$request->student_id)
         ->where('fee_category_id', $request->fee_category_id)
-        ->where('year_id', $request->year)
+        ->where('grade_id', $request->grade)
         ->where('class_id', $request->class)
         ->first();
         

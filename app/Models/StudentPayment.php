@@ -13,8 +13,8 @@ class StudentPayment extends Model
     }
 
 
-    public function student_year(){
-        return $this->belongsTo(StudentYear::class,'year_id','id');// it means the studentpayment table, in the year_id connected to the id of studentyear table
+    public function student_grade(){
+        return $this->belongsTo(StudentGrade::class,'grade_id','id');// it means the studentpayment table, in the grade_id connected to the id of studentyear table
     }
 
     public function student_class(){

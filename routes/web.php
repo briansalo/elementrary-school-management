@@ -197,7 +197,7 @@ Route::prefix('students')->group(function(){
     Route::get('registration/add', [StudentRegistrationController::class, 'StudentRegistrationAdd'])->name('student.registration.add');
     Route::post('registration/store', [StudentRegistrationController::class, 'StudentRegistrationStore'])->name('student.registration.store');
 
-    Route::get('/year/class/search', [StudentRegistrationController::class, 'StudentYearClassSearch'])->name('student.year.class.search');
+    Route::get('/grade/class/search', [StudentRegistrationController::class, 'StudentGradeClassSearch'])->name('student.grade.class.search');
 
     Route::get('registration/edit/{student_id}', [StudentRegistrationController::class, 'StudentRegistrationEdit'])
         ->name('student.registration.edit');
@@ -213,13 +213,13 @@ Route::prefix('students')->group(function(){
     Route::get('registration/fee/view', [StudentFeeAmountController::class, 'StudentFeeAmountView'])->name('student.registration_fee.view');
 
 
-    Route::get('registration/fee/search', [StudentFeeAmountController::class, 'RegistrationFeeSearch'])->name('registration_fee.year.fee.class.search');
+    Route::get('registration/fee/search', [StudentFeeAmountController::class, 'RegistrationFeeSearch'])->name('registration_fee.grade.fee.class.search');
     Route::get('registration/fee/payslip', [StudentFeeAmountController::class, 'RegistrationFeePayslip'])->name('registration.fee.payslip');
 
-    Route::get('Monthly/fee/search', [StudentFeeAmountController::class, 'MonthlyFeeSearch'])->name('monthly_fee.year.fee.class.search');
+    Route::get('Monthly/fee/search', [StudentFeeAmountController::class, 'MonthlyFeeSearch'])->name('monthly_fee.grade.fee.class.search');
     Route::get('Monthly/fee/payslip', [StudentFeeAmountController::class, 'MonthlyFeePayslip'])->name('monthly.fee.payslip');
 
-    Route::get('Exam/fee/search', [StudentFeeAmountController::class, 'ExamFeeSearch'])->name('exam_fee.year.fee.class.search');
+    Route::get('Exam/fee/search', [StudentFeeAmountController::class, 'ExamFeeSearch'])->name('exam_fee.grade.fee.class.search');
     Route::get('Exam/fee/payslip', [StudentFeeAmountController::class, 'ExamFeePayslip'])->name('exam.fee.payslip');
 
 

@@ -19,12 +19,12 @@ use App\Models\StudentGrade;
 
 use DB;
 use PDF;
-
+use Carbon\Carbon;
 class StudentRegistrationController extends Controller
 {
         Public function StudentRegistrationView(){
             $data['class'] = StudentClass::all();
-            $data['year'] = StudentYear::all();
+            $data['grade'] = StudentGrade::all();
 
             $data['alldata'] = AssignStudent::orderBy('id','desc')->get();
              
@@ -47,7 +47,7 @@ class StudentRegistrationController extends Controller
             DB::transaction(function() use($request){ 
 
                 // TO generate THE I.D. NO. OF THE STUDENT
-                $checkyear = StudentYear::find($request->year)->name;
+                $checkyear = Carbon::now()->format('Y');
                 $student = User::where('usertype','student')->orderBy('id','DESC')->first();
                 
                 //this condition if theres no student register yet in the table 
@@ -98,7 +98,7 @@ class StudentRegistrationController extends Controller
                     $assign_student = new AssignStudent();
                     $assign_student->student_id = $user->id; // we can get the latest user id that inserted because we are using db transaction
                     $assign_student->grade_id = $request->grade;
-                    $assign_student->year_id = $request->year;
+                    $assign_student->year_id = $checkyear;
                     $assign_student->class_id = $request->class;
                     $assign_student->save();
 
@@ -129,7 +129,7 @@ class StudentRegistrationController extends Controller
                             $payment = new StudentPayment();
                             $payment->student_id = $user->id;
                             $payment->fee_category_id = $value1->student_fee_id;
-                            $payment->year_id = $request->year;
+                            $payment->grade_id = $request->grade;
                             $payment->class_id = $request->class;
                             $payment->discount = $reg_discount;
                             $payment->amount = $value1->amount;
@@ -152,17 +152,17 @@ class StudentRegistrationController extends Controller
 
 
 
-        public function StudentYearClassSearch(Request $request){
+        public function StudentGradeClassSearch(Request $request){
 
             //tips if you are using 2 methods in one blade make sure all the variables from two methods have same name to avoid errors. the best way of this just copy all the variable from first method who use in the blade and paste it in the second method 
 
             $data['class'] = StudentClass::all();
-            $data['year'] = StudentYear::all();
+            $data['grade'] = StudentGrade::all();
 
-            $data['year_id'] = $request->year;
+            $data['grade_id'] = $request->grade;
             $data['class_id'] = $request->class;
 
-            $data['alldata'] = AssignStudent::where('year_id',$request->year)->where('class_id',$request->class)->get();
+            $data['alldata'] = AssignStudent::where('grade_id',$request->grade)->where('class_id',$request->class)->get();
            // dd($data['alldata']->toArray());
             return view('backend.student.student_reg.student_view', $data);
         }
