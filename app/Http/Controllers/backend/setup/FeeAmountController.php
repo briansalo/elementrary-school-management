@@ -19,7 +19,12 @@ class FeeAmountController extends Controller
     }
 
 
-    public function AddFeeAmount(Request $request){
+    public function AddFeeAmount(){
+        $data['fee_categories'] = StudentFee::all();
+        $data['classes'] = StudentClass::all();
+        return view('backend.setup.fee_amount.add_fee_amount',$data);
+    }
+    public function StoreFeeAmount(Request $request){
 
         $countClass= count($request->class);
             for ($i=0; $i<$countClass; $i++){
