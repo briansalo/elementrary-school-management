@@ -25,58 +25,54 @@ class EmployeeMonthlySalaryController extends Controller
 
             $new1 = date('m-Y', strtotime($request->month_id));
 
-            $today = Carbon::now();
-            $newtoday = date('m-Y', strtotime($today));
+
+            $today = Carbon::now()->startOfMonth();
+
+            $selected_month = Carbon::create($request->month_id);
+
+            if($today->greaterThan($selected_month)){
+                
+                  $output[] = '';
+
+                    $data = EmployeeAttendance::select('employee_id')
+                    ->groupBy('employee_id')
+                    ->where('date', 'like', '%'.$request->month_id.'%')->get();
+                
 
 
-        if($newtoday > $new1){
-            
+                        foreach($data as $row){
 
-              $output[] = '';
+                                //this is to get the attendance of user
+                    $attendance = EmployeeAttendance::where('employee_id', $row->employee_id)
+                    ->where('attendance_status','present')
+                    ->where('date', 'like', '%'.$request->month_id.'%')
+                    ->get();
 
-                $data = EmployeeAttendance::select('employee_id')
-                ->groupBy('employee_id')
-                ->where('date', 'like', '%'.$request->month_id.'%')->get();
-            
+                            $color= 'primary';
 
+                            $output[]= '
+                            <tr>
+                                <td>'.$row->user->id_no.'</td>
+                                <td>'.$row->user->name.'</td>
+                                <td>'."₱".number_format($row->user->salary,).'</td>
+                                <td>'.$attendance->count().'</td>
+                                <td>'."₱".number_format($attendance->count()*$row->user->salary,).'</td>
+                                <td>
+                               <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&year='.$row->year_id.'&class='.$row->class_id.'"> Fee Slip</a>
 
-                    foreach($data as $row){
+                                </td>
+                            </tr>
+                            ';
+                        }  //end for each
 
-                            //this is to get the attendance of user
-                $attendance = EmployeeAttendance::where('employee_id', $row->employee_id)
-                ->where('attendance_status','present')
-                ->where('date', 'like', '%'.$request->month_id.'%')
-                ->get();
-
-
-               // dd($data1->count());
-                            //computation of discount
-
-                        $color= 'primary';
-
-                        $output[]= '
-                        <tr>
-                            <td>'.$row->user->id_no.'</td>
-                            <td>'.$row->user->name.'</td>
-                            <td>'."₱".number_format($row->user->salary,).'</td>
-                            <td>'.$attendance->count().'</td>
-                            <td>'."₱".number_format($attendance->count()*$row->user->salary,).'</td>
-                            <td>
-                           <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&year='.$row->year_id.'&class='.$row->class_id.'"> Fee Slip</a>
-
-                            </td>
-                        </tr>
-                        ';
-                    }  //end for each
-
-                    return response()->json($output);
+                        return response()->json($output);
 
 
-            }else{  
+                }else{  
 
-                          $data = "higher_month";
-                         return response()->json($data);
-            }
+                              $data = "higher_month";
+                             return response()->json($data);
+                }
 
  
 
