@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClassStudentGrade extends Model
 {
-    use HasFactory;
+
+    public function school_subject(){
+        return $this->belongsTo(SchoolSubject::class, 'subject','id');
+
+    }
 }

@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\AssignGrade;
+use App\Models\ClassStudentGrade;
+
+use DB;
+
 class AssignClass extends Model
 {
     public function student(){
@@ -25,4 +30,21 @@ class AssignClass extends Model
     }
     
 
+    public function checkgrade(){
+
+        //check if what are the subject of every student 
+        $student = ClassStudentGrade::select('subject')->groupBy('subject')->where('student_id', $this->student_id)->get();
+
+        //get the pass_mark of every subject
+        $array=[];
+        foreach($student as $row){
+            $array[]= DB::table('assign_grades')->where('grade_id',$this->grade_id)
+            ->where('class_id', $this->class_id)
+            ->where('subject_id',$row->subject)
+            ->first()->pass_mark;
+        }
+
+        return $array;
+        
+    }
 }

@@ -23,7 +23,6 @@ class ClassStudentGradeController extends Controller
 
  }
  public function ClassStudentGradeView(Request $request){
-   // dd($request->select_name);
 
        $data['teacher'] = AssignClass::select('employee_id')->groupBy('employee_id')->get();
 
@@ -59,7 +58,7 @@ class ClassStudentGradeController extends Controller
           $get_grade=[];
                //get all the subject for this grade and class
            foreach($data['subjects'] as $row_three){    
-                 $get_subject =$row_three->school_subject->name;
+                 $get_subject =$row_three->school_subject->id;
 
                      $student_subject= ClassStudentGrade::where('student_id', $row->student_id)->where('subject',$get_subject)->get();
 
@@ -70,8 +69,9 @@ class ClassStudentGradeController extends Controller
                      }
                    //add all the grade from first grading to 4th grading. then divide it to four
                  $get_grade[] = array_sum($grade)/4;
-
+              
                }
+
                //collect method will help to group all grades of the student for in every subject
                // since our table in front-end in final grade is we need to put/show the grade of every student in horizontal
                //check it out also in $general_average variable. i write some comment at the top for comparison.
@@ -116,6 +116,8 @@ class ClassStudentGradeController extends Controller
                         $new = new ClassStudentGrade();
                         $new->employee_id = $request->employee;
                         $new->student_id = $request->student[$i];
+                        $new->grade_id = $request->grade_id[$i];
+                        $new->class_id = $request->class_id[$i];
                         $new->grade = $request->$get_grade[$x];
                         $new->grading = '1';
                         $new->subject = $request->$get_subject[$x];
@@ -145,6 +147,8 @@ class ClassStudentGradeController extends Controller
                         $new = new ClassStudentGrade();
                         $new->employee_id = $request->employee;
                         $new->student_id = $request->student[$i];
+                        $new->grade_id = $request->grade_id[$i];
+                        $new->class_id = $request->class_id[$i];
                         $new->grade = $request->$get_grade[$x];
                         $new->grading = '2';
                         $new->subject = $request->$get_subject[$x];
@@ -174,6 +178,8 @@ class ClassStudentGradeController extends Controller
                         $new = new ClassStudentGrade();
                         $new->employee_id = $request->employee;
                         $new->student_id = $request->student[$i];
+                        $new->grade_id = $request->grade_id[$i];
+                        $new->class_id = $request->class_id[$i];
                         $new->grade = $request->$get_grade[$x];
                         $new->grading = '3';
                         $new->subject = $request->$get_subject[$x];
@@ -204,6 +210,8 @@ class ClassStudentGradeController extends Controller
                         $new = new ClassStudentGrade();
                         $new->employee_id = $request->employee;
                         $new->student_id = $request->student[$i];
+                        $new->grade_id = $request->grade_id[$i];
+                        $new->class_id = $request->class_id[$i];
                         $new->grade = $request->$get_grade[$x];
                         $new->grading = '4';
                         $new->subject = $request->$get_subject[$x];

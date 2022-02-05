@@ -83,13 +83,16 @@
 																	<tr>
 																		<input type="hidden" name="student[]" value="{{$data->student_id}}">
 																		<input type="hidden" name="employee" value="{{$employee->employee_id}}">
+																		<input type="hidden" name="grade_id[]" value="{{$data->student_grade->id}}">
+																		<input type="hidden" name="class_id[]" value="{{$data->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
 																		<td>{{$data->student->name}}</td>
 																		<td>{{$data->student_grade->name}}</td>
 																		<td>{{$data->student_class->name}}</td>
 
 																		@foreach($subjects as $number => $subject)
-																		<input type="hidden" name="subject{{$key}}[]" value="{{$subject->school_subject->name}}">
+																		<input type="hidden" name="subject{{$key}}[]" 
+																		value="{{$subject->school_subject->id}}">
 																			@if(empty($first[$key][$number]))
 																				<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]"></td>				
 																			@else
@@ -131,13 +134,17 @@
 																@foreach($students as $key => $data)
 																	<tr>
 																		<input type="hidden" name="student[]" value="{{$data->student_id}}">
+																		<input type="hidden" name="employee" value="{{$employee->employee_id}}">
+																		<input type="hidden" name="grade_id[]" value="{{$data->student_grade->id}}">
+																		<input type="hidden" name="class_id[]" value="{{$data->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
 																		<td>{{$data->student->name}}</td>
 																		<td>{{$data->student_grade->name}}</td>
 																		<td>{{$data->student_class->name}}</td>
 
 																		@foreach($subjects as $number => $subject)
-																		<input type="hidden" name="subject{{$key}}[]" value="{{$subject->school_subject->name}}">
+																		<input type="hidden" name="subject{{$key}}[]" 
+																		value="{{$subject->school_subject->id}}">
 																			@if(empty($second[$key][$number]))
 																				<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]"></td>
 																			@else
@@ -180,13 +187,17 @@
 																@foreach($students as $key => $data)
 																	<tr>
 																		<input type="hidden" name="student[]" value="{{$data->student_id}}">
+																		<input type="hidden" name="employee" value="{{$employee->employee_id}}">
+																		<input type="hidden" name="grade_id[]" value="{{$data->student_grade->id}}">
+																		<input type="hidden" name="class_id[]" value="{{$data->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
 																		<td>{{$data->student->name}}</td>
 																		<td>{{$data->student_grade->name}}</td>
 																		<td>{{$data->student_class->name}}</td>
 
 																		@foreach($subjects as $number => $subject)
-																		<input type="hidden" name="subject{{$key}}[]" value="{{$subject->school_subject->name}}">
+																		<input type="hidden" name="subject{{$key}}[]" 
+																		value="{{$subject->school_subject->id}}">
 																			@if(empty($third[$key][$number]))
 																				<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]"></td>
 																			@else
@@ -232,13 +243,17 @@
 																@foreach($students as $key => $data)
 																	<tr>
 																		<input type="hidden" name="student[]" value="{{$data->student_id}}">
+																		<input type="hidden" name="employee" value="{{$employee->employee_id}}">
+																		<input type="hidden" name="grade_id[]" value="{{$data->student_grade->id}}">
+																		<input type="hidden" name="class_id[]" value="{{$data->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
 																		<td>{{$data->student->name}}</td>
 																		<td>{{$data->student_grade->name}}</td>
 																		<td>{{$data->student_class->name}}</td>
 
 																		@foreach($subjects as $number => $subject)
-																		<input type="hidden" name="subject{{$key}}[]" value="{{$subject->school_subject->name}}">
+																		<input type="hidden" name="subject{{$key}}[]" 
+																		value="{{$subject->school_subject->id}}">
 																			@if(empty($fourth[$key][$number]))
 																				<td><input type="number" min="1" max="100" step=".01" class="form-control form-control-sm" name="grade{{$key}}[]"></td>
 																			@else
@@ -283,24 +298,20 @@
 																		<td>{{$data->student->id_no}}</td>
 																		<td>{{$data->student->name}}</td>
 																		<td>{{$data->student_grade->name}}</td>
-																		<td>{{$data->student_class->name}}</td>
+																		<td>{{$data->student_class->name}}</td>												
 
-															@foreach($subjects as $second_key=> $subject)
-																		<td>
-																	@if(!empty($final_grade[$key][$second_key]))
-																			{{$final_grade[$key][$second_key]}}
-																			@if($final_grade[$key][$second_key] >= 90 AND $final_grade[$key][$second_key] <= 100)
-																			  (A+)
-																			@elseif($final_grade[$key][$second_key] >= 80 AND $final_grade[$key][$second_key] <= 89)
-																				(B+)
-																			@elseif($final_grade[$key][$second_key] >= 75 AND $final_grade[$key][$second_key] <= 79)
-																			  (C+)
-																			@else
-																			  (D)
-																			@endif
-											          	@endif		
-																		</td>
-															 @endforeach
+																		@foreach($subjects as $second_key=> $subject)	
+																					<td>
+																				@if(!empty($final_grade[$key][$second_key]))
+																						{{$final_grade[$key][$second_key]}}
+																						@if($final_grade[$key][$second_key] >= $data->checkgrade()[$second_key])
+																						  (Passed)
+																						@else
+																						  (Failed)
+																						@endif
+														          	@endif		
+																					</td>
+																		@endforeach
 
 																		<td>
 																	@if(!empty($general_average[$key]))		
