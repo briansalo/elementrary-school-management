@@ -111,7 +111,7 @@ class ClassStudentGradeController extends Controller
 
             for($i=0; $i<count($request->student); $i++){
                   for($x=0; $x<count($request->subject0); $x++){
-
+                
                     //in assignstudent table. update the class_status of the student to no. 1. it means the student already had grade and can't 
                    // AssignStudent::where('student_id', $request->student[$i])->update(['class_status' => 1]);
                        $get_grade = 'grade'.$i;

@@ -83,8 +83,10 @@
 																	<tr>
 																		<input type="hidden" name="student[]" value="{{$data->student_id}}">
 																		<input type="hidden" name="employee" value="{{$employee->employee_id}}">
-																		<input type="hidden" name="grade_id[]" value="{{$data->student_grade->id}}">
-																		<input type="hidden" name="class_id[]" value="{{$data->student_class->id}}">
+																		<input type="hidden" name="grade_id[]" 
+																		value="{{$data->student_grade->student_grade->id}}">
+																		<input type="hidden" name="class_id[]" 
+																		value="{{$data->student_class->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
 																		<td>{{$data->student->name}}</td>
 																		<td>{{$data->student_grade->student_grade->name}}</td>
@@ -135,12 +137,14 @@
 																	<tr>
 																		<input type="hidden" name="student[]" value="{{$data->student_id}}">
 																		<input type="hidden" name="employee" value="{{$employee->employee_id}}">
-																		<input type="hidden" name="grade_id[]" value="{{$data->student_grade->id}}">
-																		<input type="hidden" name="class_id[]" value="{{$data->student_class->id}}">
+																		<input type="hidden" name="grade_id[]" 
+																		value="{{$data->student_grade->student_grade->id}}">
+																		<input type="hidden" name="class_id[]" 
+																		value="{{$data->student_class->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
 																		<td>{{$data->student->name}}</td>
-																		<td>{{$data->student_grade->name}}</td>
-																		<td>{{$data->student_class->name}}</td>
+																		<td>{{$data->student_grade->student_grade->name}}</td>
+																		<td>{{$data->student_class->student_class->name}}</td>
 
 																		@foreach($subjects as $number => $subject)
 																		<input type="hidden" name="subject{{$key}}[]" 
@@ -188,12 +192,14 @@
 																	<tr>
 																		<input type="hidden" name="student[]" value="{{$data->student_id}}">
 																		<input type="hidden" name="employee" value="{{$employee->employee_id}}">
-																		<input type="hidden" name="grade_id[]" value="{{$data->student_grade->id}}">
-																		<input type="hidden" name="class_id[]" value="{{$data->student_class->id}}">
+																		<input type="hidden" name="grade_id[]" 
+																		value="{{$data->student_grade->student_grade->id}}">
+																		<input type="hidden" name="class_id[]" 
+																		value="{{$data->student_class->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
 																		<td>{{$data->student->name}}</td>
-																		<td>{{$data->student_grade->name}}</td>
-																		<td>{{$data->student_class->name}}</td>
+																		<td>{{$data->student_grade->student_grade->name}}</td>
+																		<td>{{$data->student_class->student_class->name}}</td>
 
 																		@foreach($subjects as $number => $subject)
 																		<input type="hidden" name="subject{{$key}}[]" 
@@ -244,12 +250,14 @@
 																	<tr>
 																		<input type="hidden" name="student[]" value="{{$data->student_id}}">
 																		<input type="hidden" name="employee" value="{{$employee->employee_id}}">
-																		<input type="hidden" name="grade_id[]" value="{{$data->student_grade->id}}">
-																		<input type="hidden" name="class_id[]" value="{{$data->student_class->id}}">
+																		<input type="hidden" name="grade_id[]" 
+																		value="{{$data->student_grade->student_grade->id}}">
+																		<input type="hidden" name="class_id[]"
+																		 value="{{$data->student_class->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
 																		<td>{{$data->student->name}}</td>
-																		<td>{{$data->student_grade->name}}</td>
-																		<td>{{$data->student_class->name}}</td>
+																		<td>{{$data->student_grade->student_grade->name}}</td>
+																		<td>{{$data->student_class->student_class->name}}</td>
 
 																		@foreach($subjects as $number => $subject)
 																		<input type="hidden" name="subject{{$key}}[]" 
@@ -297,8 +305,8 @@
 																	<tr>
 																		<td>{{$data->student->id_no}}</td>
 																		<td>{{$data->student->name}}</td>
-																		<td>{{$data->student_grade->name}}</td>
-																		<td>{{$data->student_class->name}}</td>												
+																		<td>{{$data->student_grade->student_grade->name}}</td>
+																		<td>{{$data->student_class->student_class->name}}</td>												
 
 																		@foreach($subjects as $second_key=> $subject)	
 																					<td>
