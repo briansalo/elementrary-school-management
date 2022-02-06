@@ -24,7 +24,7 @@
 						<thead>
 							<tr>
 								<th width="5%">SL</th>
-								<th>Role</th>
+								<th>Usertype</th>
 								<th>Name</th>
 								<th>Email</th>
 								<th>Password</th>
@@ -35,15 +35,16 @@
 							@foreach($alldata as $key => $user)
 							<tr>
 								<td>{{ $key+1 }}</td>
-								<td>{{ $user->role }}</td>
+								<td>{{$user->usertype}}</td>
 								<td>{{ $user->name }}</td>
 								<td>{{ $user->email }}</td>
 								<td>{{ $user->code }}</td>
 								<td>
-									<a href="{{ route('user.edit',$user->id) }}" class="btn btn-info">Edit</a>
-									<a href="{{ route('user.delete',$user->id) }}" class="btn btn-danger" id="delete">Delete</a>
+								@if($user->email != "admin@admin.com")	
+										<a href="{{ route('user.edit',$user->id) }}" class="btn btn-info">Edit</a>
+										<a href="{{ route('user.delete',$user->id) }}" class="btn btn-danger" id="delete">Delete</a>
+								@endif
 								</td>
-
 							</tr>
 							@endforeach
 

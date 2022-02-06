@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Hash;
+
+
 class UserController extends Controller
 {
     public function UserView(){
-        $data['alldata'] = User::where('usertype','Admin')->get();
+        $data['alldata'] = User::whereIn('usertype',['Admin','Operator'])->get();
         return view('backend.user.view_user',$data); 
     }
 
@@ -30,7 +33,7 @@ class UserController extends Controller
         $data->role = $request->role;
         $data->name = $request->user_name;
         $data->email = $request->email;
-        $data->password = bcrypt($code);
+        $data->password = Hash::make($code);
         $data->code = $code;
         $data->save();
 
@@ -51,7 +54,7 @@ class UserController extends Controller
         $data = User::Find($id);
         $data->name = $request->user_name;
         $data->email = $request->email;
-         $data->role = $request->role;
+        $data->usertype = $request->usertype;
         $data->save();
 
         $notification = array(

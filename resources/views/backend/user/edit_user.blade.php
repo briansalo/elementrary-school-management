@@ -24,10 +24,10 @@
 							<div class="form-group">
 								<h5>User Role <span class="text-danger">*</span></h5>
 								<div class="controls">
-									<select name="role"  required="" class="form-control" aria-invalid="false">
+									<select name="usertype"  required="" class="form-control" aria-invalid="false">
 										<option value="">Select Your Role</option> 
-										<option value="Admin" {{ $editData->role == "Admin" ? "selected" : ""}}>Admin</option>
-										<option value="User" {{ $editData->role == "Operator" ? "selected": ""}}>Operator</option>
+										<option value="Admin" {{ $editData->usertype == "Admin" ? "selected" : ""}}>Admin</option>
+										<option value="Operator" {{ $editData->usertype == "Operator" ? "selected": ""}}>Operator</option>
 									</select>
 								<div class="help-block"></div></div>
 							</div>
