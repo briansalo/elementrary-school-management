@@ -32,7 +32,13 @@ class ClassStudentGradeController extends Controller
         $employee = AssignEmployee::where('employee_id', $request->select_name)->first();
         $data['subjects'] = AssignGrade::where('grade_id', $employee->grade_id)->where('class_id', $employee->class_id)->get();
 
-        $data['students'] = AssignClass::where('employee_id', $request->select_name)->get();
+        //$data['students'] = AssignClass::where('employee_id', $request->select_name)->get();
+        //dd($data['students']);
+        $data['students'] = AssignClass::
+        join('assign_students', 'assign_classes.student_id','=','assign_students.student_id')
+        ->where('assign_classes.employee_id',$request->select_name)
+        ->where('assign_students.class_status','1')
+        ->get();
 
           // this will retrieve the grade in every student by grading
         $first = [];
@@ -103,17 +109,24 @@ class ClassStudentGradeController extends Controller
        if($request->has('1st_grading')){
  
             $student = ClassStudentGrade::where('grading','1')->get();
+
             //check if this $student variable is not empty then delete it first all the record before save new data
              if(!$student->isEmpty()){
-                  ClassStudentGrade::where('grading', '1')->where('employee_id', $request->employee)->delete();
+                ClassStudentGrade::where('grading', '1')->where('employee_id', $request->employee)->delete();
+
+                for($i=0; $i<count($request->student); $i++){
+                  ClassStudentGrade::where('grading', '1')
+                  ->where('student_id',$request->student[$i])
+                  ->delete();
+                }
              }
 
 
             for($i=0; $i<count($request->student); $i++){
                   for($x=0; $x<count($request->subject0); $x++){
-                
+
                     //in assignstudent table. update the class_status of the student to no. 1. it means the student already had grade and can't 
-                   // AssignStudent::where('student_id', $request->student[$i])->update(['class_status' => 1]);
+                    AssignStudent::where('student_id', $request->student[$i])->update(['class_status' => 1]);
                        $get_grade = 'grade'.$i;
                        $get_subject = 'subject'.$i;
                      
@@ -140,6 +153,12 @@ class ClassStudentGradeController extends Controller
             //check if this $student variable is not empty then delete it first all the record before save new data
              if(!$student->isEmpty()){
                   ClassStudentGrade::where('grading', '2')->where('employee_id', $request->employee)->delete();
+
+                    for($i=0; $i<count($request->student); $i++){
+                      ClassStudentGrade::where('grading', '2')
+                      ->where('student_id',$request->student[$i])
+                      ->delete();
+                    }
              }            
 
             for($i=0; $i<count($request->student); $i++){

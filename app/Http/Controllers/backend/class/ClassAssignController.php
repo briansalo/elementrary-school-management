@@ -19,20 +19,8 @@ class ClassAssignController extends Controller
 
 
     public function ClassAssignView(){
-        //check if the employee is update
-        //$check_employee = AssignEmployee::all();
-        //$check_student = AssignStudent::all();
-        //$try = [];
-        //foreach($check_employee as $row){
-            //$check_class = AssignClass::where('employee_id',$row->employee_id)->first();
-            //if(!empty($check_class)){
-              //  if( $row->grade_id != $check_class->grade_id or $row->class_id != $check_class->class_id){
-            //        AssignClass::where('employee_id',$row->employee_id)->delete();
-                    //$try[] = $row->grade_id;
-          //      }
-        //    }
-      //  }//end for
 
+        //check if the teacher and student is having same grade and class
         $check_class = AssignClass::all();
         foreach($check_class as $row){
              $get_employee = AssignEmployee::where('employee_id', $row->employee_id)->first();
@@ -47,10 +35,9 @@ class ClassAssignController extends Controller
 
         // to count how many student for each employee
             $no_of_student = [];
-        foreach($alldata as $row){
-            $data = AssignClass::where('employee_id', $row->employee_id)->get();
-            $no_of_student[] = count($data);
-
+            foreach($alldata as $row){
+                $data = AssignClass::where('employee_id', $row->employee_id)->get();
+                $no_of_student[] = count($data);
             }
 
             //to get all the available students
@@ -75,7 +62,7 @@ class ClassAssignController extends Controller
 
         $data['employee'] = AssignEmployee::where('employee_id', $id)->first();
                 
-                // get the student for those have same class_id and grade_id of the employee       
+        // get the student for those have same class_id and grade_id of the employee       
         $data['alldata'] = AssignStudent::where('class_id', $data['employee']->class_id)
         ->where('grade_id', $data['employee']->grade_id)
         ->where('class_status', '0')
@@ -98,7 +85,13 @@ class ClassAssignController extends Controller
 
 public function ClassAssignStore(Request $request){
 
+
+
     for($i=0; $i<count($request->check_student); $i++){
+
+        AssignStudent::where('student_id', $request->check_student[$i])->update(['class_status' => 1]);
+
+        ClassStudentGrade::where('student_id',$request->check_student[$i])->update(['employee_id'=> $request->employee_id]);
 
         $new = new AssignClass();
         $new->employee_id = $request->employee_id;
@@ -136,11 +129,14 @@ public function ClassAssignList($id){
 
 public function ClassAssignListRemove($student, $employee){
 
-    
-    AssignClass::where('student_id',$student)->delete();
+    $check_student = ClassStudentGrade::where('student_id', $student)->first();
 
+    if(!empty($check_student)){
     //in assignstudent table. update the class_status of student to zero. it means the student has no teacher
-    AssignStudent::where('student_id', $student)->update(['class_status' => 0]);
+         AssignStudent::where('student_id', $student)->update(['class_status' => 0]);   
+    }
+
+        AssignClass::where('student_id', $student)->delete();
 
         $notification = array(
             'message' => 'Student Remove Successfully',

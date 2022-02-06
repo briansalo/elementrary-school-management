@@ -44,11 +44,10 @@
 										</p>
 							  </div>
 							  
-							  @if($check_student[$key]->isEmpty())
 								  <div>
 											<a class="btn btn-block btn-danger btn-sm btn-rounded" href="{{ route('class.assign.list.remove', ['student'=>$student->student_id, 'employee'=>$employee->employee_id]) }}">Remove</a>
 								  </div>
-							  @endif
+							  
 					 </div>
 					</div>
 					@endforeach
