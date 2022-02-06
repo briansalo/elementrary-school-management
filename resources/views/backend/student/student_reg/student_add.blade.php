@@ -136,7 +136,7 @@
 														<div class="form-group">
 															<h5>Registration Discount<span class="text-danger">*</span></h5>
 															<div class="controls">
-																<input type="number" name="discount"  class="form-control">
+																<input type="number" name="discount" min="1" max="20" class="form-control">
 															</div>
 														</div>
 												</div><!-- end col md 4 -->
