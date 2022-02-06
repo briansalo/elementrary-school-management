@@ -87,8 +87,8 @@
 																		<input type="hidden" name="class_id[]" value="{{$data->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
 																		<td>{{$data->student->name}}</td>
-																		<td>{{$data->student_grade->name}}</td>
-																		<td>{{$data->student_class->name}}</td>
+																		<td>{{$data->student_grade->student_grade->name}}</td>
+																		<td>{{$data->student_class->student_class->name}}</td>
 
 																		@foreach($subjects as $number => $subject)
 																		<input type="hidden" name="subject{{$key}}[]" 
