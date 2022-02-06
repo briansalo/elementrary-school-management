@@ -11,6 +11,7 @@ use App\Models\EmployeeSallaryLog;
 use App\Models\StudentGrade;
 use App\Models\StudentClass;
 use App\Models\AssignEmployee;
+use App\Models\ClassStudentGrade;
 
 use DB;
 use PDF;
@@ -150,7 +151,8 @@ class EmployeeRegistrationController extends Controller
 
 
         public function EmployeeUpdateData(Request $request, $employee_id){
-
+            $check_employe = ClassStudentGrade::where('employee_id', $employee_id)->first();
+            if(empty($check_employe)){
            // use db transaction for inserting multiple table. the usage of this is you can get the latest data that inserted and use it to other table. dont forget to declare the db at the top to use this
                 DB::transaction(function() use($request, $employee_id){ 
 
@@ -181,13 +183,22 @@ class EmployeeRegistrationController extends Controller
                     $assign_employee->designation_id = $request->designation;
                     $assign_employee->save();
     
+                 }); // end db transaction
 
-            }); // end db transaction
+                    $notification = array(
+                        'message' => 'Employee Updated Successfully',
+                        'alert-type' => 'success'  //success variable came from admin.blade.php in java script toastr
+                    );
 
-        $notification = array(
-            'message' => 'Employee Updated Successfully',
-            'alert-type' => 'success'  //success variable came from admin.blade.php in java script toastr
-        );
+            }else{
+
+                $notification = array(
+                    'message' => 'This employee had already grades for their student, we cant update this employee now',
+                    'alert-type' => 'error'  //success variable came from admin.blade.php in java script toastr
+                );
+            }
+
+
         return redirect()->route('employee.registration.view')->with($notification);
         
         }// end method

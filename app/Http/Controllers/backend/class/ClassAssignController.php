@@ -19,6 +19,19 @@ class ClassAssignController extends Controller
 
 
     public function ClassAssignView(){
+        //check if the employee is update
+        $check_employee = AssignEmployee::all();
+        $check_student = AssignStudent::all();
+        $try = [];
+        foreach($check_employee as $row){
+            $check_class = AssignClass::where('employee_id',$row->employee_id)->first();
+            if(!empty($check_class)){
+                if( $row->grade_id != $check_class->grade_id or $row->class_id != $check_class->class_id){
+                    AssignClass::where('employee_id',$row->employee_id)->delete();
+                    //$try[] = $row->grade_id;
+                }
+            }
+        }//end for
 
         $alldata = AssignEmployee::all();
 
@@ -42,7 +55,7 @@ class ClassAssignController extends Controller
 
             //to get all the available students
             $assign_class = AssignClass::all()->pluck('student_id');             
-           $data['alldata'] = AssignStudent::whereNotIn('student_id',$assign_class)->get();
+           $data['alldata'] = AssignStudent::whereNotIn('student_id',$assign_class)->where('class_status','0')->get();
 
            return view('backend.class.class_assign.class_assign_student_available', $data);
 
@@ -61,7 +74,7 @@ class ClassAssignController extends Controller
         if($data['alldata']->isEmpty()){
 
                 $notification = array(
-                    'message' => 'No Available Student for this',
+                    'message' => 'There is no available student for this',
                     'alert-type' => 'error'  //success variable came from admin.blade.php in java script toastr
                 );
                 return redirect()->route('class.assign.view')->with($notification);
@@ -76,9 +89,6 @@ class ClassAssignController extends Controller
 public function ClassAssignStore(Request $request){
 
     for($i=0; $i<count($request->check_student); $i++){
-
-            //in assignstudent table. update the class_status of the student to no. 1. it means the student already had teachers
-        AssignStudent::where('student_id', $request->check_student[$i])->update(['class_status' => 1]);
 
         $new = new AssignClass();
         $new->employee_id = $request->employee_id;
