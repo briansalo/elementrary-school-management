@@ -17,12 +17,12 @@ class AssignClass extends Model
     }
 
         public function student_class(){
-        return $this->belongsTo(StudentClass::class,'class_id','id'); // it means the assignstudent table, in the class_id connected to the id of studenclass table
+        return $this->belongsTo(AssignStudent::class,'student_id','student_id'); // it means the assignstudent table, in the class_id connected to the id of studenclass table
     }
 
 
     public function student_grade(){
-        return $this->belongsTo(StudentGrade::class,'grade_id','id');
+        return $this->belongsTo(AssignStudent::class,'student_id','student_id');
     }
 
     public function employee(){

@@ -38,7 +38,10 @@
 										-->
 							  <div class="media-body">
 										<h3 style="color:black;"><strong>{{$student->student->name}}</strong></h3>
-										<p>{{ $student->student_grade->name }} {{ $student->student_class->name }}</p>
+										<p>
+											{{ $student->student_grade->student_grade->name }} -
+											{{ $student->student_class->student_class->name }}
+										</p>
 							  </div>
 							  
 							  @if($check_student[$key]->isEmpty())

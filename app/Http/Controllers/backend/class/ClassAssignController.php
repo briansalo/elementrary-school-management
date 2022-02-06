@@ -20,18 +20,28 @@ class ClassAssignController extends Controller
 
     public function ClassAssignView(){
         //check if the employee is update
-        $check_employee = AssignEmployee::all();
-        $check_student = AssignStudent::all();
-        $try = [];
-        foreach($check_employee as $row){
-            $check_class = AssignClass::where('employee_id',$row->employee_id)->first();
-            if(!empty($check_class)){
-                if( $row->grade_id != $check_class->grade_id or $row->class_id != $check_class->class_id){
-                    AssignClass::where('employee_id',$row->employee_id)->delete();
+        //$check_employee = AssignEmployee::all();
+        //$check_student = AssignStudent::all();
+        //$try = [];
+        //foreach($check_employee as $row){
+            //$check_class = AssignClass::where('employee_id',$row->employee_id)->first();
+            //if(!empty($check_class)){
+              //  if( $row->grade_id != $check_class->grade_id or $row->class_id != $check_class->class_id){
+            //        AssignClass::where('employee_id',$row->employee_id)->delete();
                     //$try[] = $row->grade_id;
-                }
-            }
-        }//end for
+          //      }
+        //    }
+      //  }//end for
+
+        $check_class = AssignClass::all();
+        foreach($check_class as $row){
+             $get_employee = AssignEmployee::where('employee_id', $row->employee_id)->first();
+             $get_student = AssignStudent::where('student_id', $row->student_id)->first();
+             if($get_employee->grade_id != $get_student->grade_id or $get_employee->class_id != $get_student->class_id){
+                 AssignClass::where('employee_id',$row->employee_id)->where('student_id', $row->student_id)->delete();
+             }
+
+        }
 
         $alldata = AssignEmployee::all();
 
