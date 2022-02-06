@@ -136,7 +136,7 @@
 													</div>
 												</div>
 											</div><!-- end col md 4 -->
-
+											<!--
 										<div class="col-md-4">
 													<div class="form-group">
 														<h5>Year <span class="text-danger">*</span></h5>
@@ -149,7 +149,8 @@
 															</select>
 														<div class="help-block"></div></div>
 													</div>
-										</div><!-- end col md 4 -->
+										</div>
+										-->
 
 										<div class="col-md-4">
 													<div class="form-group">
@@ -165,13 +166,6 @@
 													</div>
 										</div><!-- end col md 4 -->
 
-						 </div><!-- /.4th row -->
-
-
-
-
-						 <div class="row">
-
 											<div class="col-md-4">
 														<div class="form-group">
 															<h5>Grade <span class="text-danger">*</span></h5>
@@ -186,6 +180,15 @@
 															<div class="help-block"></div></div>
 														</div>
 											</div><!-- end col md 4 -->				
+											
+						 </div><!-- /.4th row -->
+
+
+
+
+						 <div class="row">
+
+
 											<!--
 										<div class="col-md-4">
 												<div class="form-group">

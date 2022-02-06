@@ -209,7 +209,7 @@ class StudentRegistrationController extends Controller
                     $user->save();
 
                     $assign_student = AssignStudent::where('student_id',$student_id)->first();
-                    $assign_student->year_id = $request->year;
+                    //$assign_student->year_id = $request->year;
                     $assign_student->class_id = $request->class;
                     $assign_student->grade_id = $request->grade;
                     $assign_student->save();
