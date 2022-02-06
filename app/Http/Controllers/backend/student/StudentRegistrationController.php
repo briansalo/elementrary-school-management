@@ -17,6 +17,8 @@ use App\Models\StudentFee;
 use App\Models\FeeCategoryAmount;
 use App\Models\StudentGrade;
 
+use App\Models\ClassStudentGrade;
+
 use DB;
 use PDF;
 use Carbon\Carbon;
@@ -146,6 +148,7 @@ class StudentRegistrationController extends Controller
             'message' => 'Student Registration Inserted Successfully',
             'alert-type' => 'success'  //success variable came from admin.blade.php in java script toastr
         );
+
         return redirect()->route('student.registration.view')->with($notification);
         
         }// end method
@@ -183,6 +186,8 @@ class StudentRegistrationController extends Controller
 
 
         public function StudentRegistrationUpdate(Request $request, $student_id){
+            $check_student = ClassStudentGrade::where('student_id', $student_id)->first();
+            if(empty($check_student)){
 
            // use db transaction for inserting multiple table. the usage of this is you can get the latest data that inserted and use it to other table. dont forget to declare the db at the top to use this
                 DB::transaction(function() use($request, $student_id){ 
@@ -219,12 +224,20 @@ class StudentRegistrationController extends Controller
                     $discount->discount = $request->discount;
                     $discount->save();       
 
-            }); // end db transaction
+                 }); // end db transaction
 
-        $notification = array(
-            'message' => 'Student Updated Successfully',
-            'alert-type' => 'success'  //success variable came from admin.blade.php in java script toastr
-        );
+                    $notification = array(
+                        'message' => 'Student Updated Successfully',
+                        'alert-type' => 'success'  //success variable came from admin.blade.php in java script toastr
+                    );
+
+            }else{
+
+                $notification = array(
+                    'message' => 'This student had already grades, we cant update this student now',
+                    'alert-type' => 'error'  //success variable came from admin.blade.php in java script toastr
+                );
+            }
         return redirect()->route('student.registration.view')->with($notification);
         
         }// end method
