@@ -61,6 +61,8 @@ class ClassStudentGradeController extends Controller
       ->where('employee_id', $request->select_name)
       ->orderBy('created_at','ASC')
       ->get();
+
+      dd($get_student);
      foreach($get_student as $row){
 
           $get_grade=[];
