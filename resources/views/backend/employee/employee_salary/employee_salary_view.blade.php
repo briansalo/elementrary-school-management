@@ -44,7 +44,7 @@
 									<td>{{ $employee->id_no }}</td>
 									<td>{{ $employee->designation->name }}</td>
 									<td>{{ $employee->gender }}</td>
-									<td>{{ $employee->salary }}</td>
+									<td>{{ number_format($employee->salary,2) }}</td>
 
 									<td>
 										@if($employee->salary_increase_status == '1')

@@ -34,7 +34,7 @@
 							<tr>
 								<td>{{ $key+1 }}</td>
 								<td>{{ $detail['student_class']['name'] }}</td>  <!-- this method came from fee categoryamount models -->
-								<td>{{ $detail->amount}}</td>
+								<td>{{ number_format($detail->amount,2)}}</td>
 							</tr>
 							@endforeach
 

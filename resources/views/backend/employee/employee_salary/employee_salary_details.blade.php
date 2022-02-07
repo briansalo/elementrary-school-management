@@ -39,9 +39,9 @@
 							@foreach($alldata as $key => $data_salary)
 							<tr>
 								<td>{{ $key+1 }}</td> 
-								<td>{{$data_salary->previous_salary}}</td>
-								<td>{{$data_salary->increment_salary}}</td>
-								<td>{{$data_salary->present_salary}}</td>
+								<td>{{number_format($data_salary->previous_salary,2)}}</td>
+								<td>{{number_format($data_salary->increment_salary,2)}}</td>
+								<td>{{number_format($data_salary->present_salary,2)}}</td>
 								<td>{{date('Y-m-d',strtotime($data_salary->effective_salary))}}</td>
 									@if($data_salary->status == 0)
 										<td style="background-color:red; color:white;">Cancel</td>

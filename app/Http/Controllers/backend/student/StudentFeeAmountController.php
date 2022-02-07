@@ -59,7 +59,7 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.ucwords($row->student->name).'</td>
-                        <td>'.'₱'.$row->amount.'</td>
+                        <td>'.'₱'.number_format($row->amount,2).'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.number_format($total,2).'</td>
                         <td>

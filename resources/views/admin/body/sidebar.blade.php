@@ -97,8 +97,8 @@
             <li><a href="{{route('employee.registration.view')}}"><i class="ti-more"></i>Employee List</a></li>
             <li><a href="{{route('employee.salary.view')}}"><i class="ti-more"></i>Employee Salary</a></li>
             <li><a href="{{route('employee.attendance.view')}}"><i class="ti-more"></i>Employee Attendance</a></li>
-            <li><a href="{{route('employee.monthly.salary.view')}}"><i class="ti-more"></i>Employee Monthly Salary</a></li>
             <li><a href="{{route('employee.generate.payroll.view')}}"><i class="ti-more"></i>Generate Payroll</a></li>
+            <li><a href="{{route('employee.monthly.salary.view')}}"><i class="ti-more"></i>Employee Monthly Salary</a></li>
           </ul>
         </li>
 
