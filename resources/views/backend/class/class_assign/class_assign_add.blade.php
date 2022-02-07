@@ -21,7 +21,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Please Select Student for {{$employee->employee->name}}</h3>
+				  <h3 class="box-title">Please select student for <u>{{ucwords($employee->employee->name)}}</u></h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -38,7 +38,7 @@
 		  	   @foreach($alldata as $key => $student)
 		  			<div class="col-md-3">
 
-        			<div class="media bg-white mb-20">
+        			<div class="media mb-20" style="background-color: #1a233a;">
         					<!--
 						 			<a href="#" class="avatar avatar-lg ">
 						 				
@@ -47,10 +47,10 @@
 										-->
 
 									  <div class="media-body">
-											<h4 style="color:black;"><strong>{{ $student->student->name }}</strong></h4>
-											<p>{{ $student->student_grade->name }} {{ $student->student_class->name }}</p>
+											<h4 style="color:white;"><strong>{{ ucwords($student->student->name) }}</strong></h4>
+											<p style="color:white;">{{ $student->student_grade->name }} {{ $student->student_class->name }}</p>
 									  </div>
-									  <label class="switch">
+									  <label class="switch switch-success">
 												<input type="checkbox" name="check_student[]" value="{{ $student->student->id }}">
 												<span class="switch-indicator"></span>
 									  </label>
