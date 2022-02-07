@@ -190,6 +190,12 @@ class ClassStudentGradeController extends Controller
             //check if this $student variable is not empty then delete it first all the record before save new data
              if(!$student->isEmpty()){
                   ClassStudentGrade::where('grading', '3')->where('employee_id', $request->employee)->delete();
+
+                    for($i=0; $i<count($request->student); $i++){
+                      ClassStudentGrade::where('grading', '3')
+                      ->where('student_id',$request->student[$i])
+                      ->delete();
+                    }
              }            
 
             for($i=0; $i<count($request->student); $i++){
@@ -222,6 +228,12 @@ class ClassStudentGradeController extends Controller
             //check if this $student variable is not empty then delete it first all the record before save new data
              if(!$student->isEmpty()){
                   ClassStudentGrade::where('grading', '4')->where('employee_id', $request->employee)->delete();
+
+                    for($i=0; $i<count($request->student); $i++){
+                      ClassStudentGrade::where('grading', '4')
+                      ->where('student_id',$request->student[$i])
+                      ->delete();
+                    }
              }            
 
             for($i=0; $i<count($request->student); $i++){
