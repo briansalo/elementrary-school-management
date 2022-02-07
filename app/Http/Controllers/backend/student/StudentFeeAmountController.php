@@ -30,8 +30,8 @@ class StudentFeeAmountController extends Controller
         $data['classes'] = StudentClass::all();
         $data['fees'] = StudentFee::all();
 
+        return view('backend.student.student_fee.studentfee_view', $data);
 
-            return view('backend.student.student_fee.studentfee_view', $data);
     }
 
 
@@ -61,10 +61,10 @@ class StudentFeeAmountController extends Controller
                         <td>'.$row->student->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
-                        <td>'.'₱'.$total.'</td>
+                        <td>'.'₱'.number_format($total,2).'</td>
                         <td>
-                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'"> Fee Slip</a>
-
+                           <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'"> Fee Slip
+                           </a>
                         </td>
                     </tr>
                     ';
@@ -86,7 +86,7 @@ class StudentFeeAmountController extends Controller
 
         public function RegistrationFeePayslip(Request $request){
 
-
+         $data['fee_category_id'] = $request->fee_category_id; 
         
         $data['details'] = StudentPayment::where('student_id',$request->student_id)
         ->where('fee_category_id', $request->fee_category_id)
@@ -108,14 +108,10 @@ class StudentFeeAmountController extends Controller
                     $total = $amount-$compute;
                 
          $data['computation'] = $total;
-            //end for computation of discount
 
         
-      return view('backend.student.student_fee.studentfee_pdf', $data);
+        return view('backend.student.student_fee.studentfee_pdf', $data);
 
-              $pdf = PDF::loadView('backend.student.student_fee.studentfee_pdf', $data);
-              
-                return $pdf->download('pdf_file.pdf');
 
 
         }
@@ -127,10 +123,11 @@ class StudentFeeAmountController extends Controller
            
            $output[] = '';
 
-            $alldata = StudentPayment::where('class_id', $request->class_id)
-            ->where('grade_id', $request->grade)
-            ->where('fee_category_id', $request->selectfee)
-            ->get();
+            $amount = FeeCategoryAmount::where('student_fee_id', $request->selectfee)
+            ->where('class_id', $request->class_id)
+            ->first()->amount;
+
+           $alldata = AssignStudent::where('grade_id',$request->grade)->where('class_id', $request->class_id)->get();
 
                 foreach($alldata as $row){
 
@@ -140,11 +137,12 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.'₱'.$row->amount.'</td>
-                        <td>'.$row->discount.'%'.'</td>
-                        <td>'.'₱'.$row->amount.'</td>
+                        <td>'.'₱'.number_format($amount,2).'</td>
+                        <td>'.'0'.'</td>
+                        <td>'.'₱'.number_format($amount,2).'</td>
                         <td>
-                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("monthly.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'&month='.$request->month_id.'"> Fee Slip</a>
+                           <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("monthly.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$request->selectfee.'&grade='.$row->grade_id.'&class='.$row->class_id.'&month='.$request->month_id.'"> Fee Slip
+                           </a>
 
                         </td>
                     </tr>
@@ -166,36 +164,37 @@ class StudentFeeAmountController extends Controller
 
 
 
-        public function MonthlyFeePayslip(Request $request){
+    public function MonthlyFeePayslip(Request $request){
+
         $data['month'] = $request->month;    
-        
+
+        $data['fee_category_id'] = $request->fee_category_id; 
+
+        $data['amount'] = FeeCategoryAmount::where('student_fee_id', $request->fee_category_id)
+            ->where('class_id', $request->class)
+            ->first()->amount;
+
         $data['details'] = StudentPayment::where('student_id',$request->student_id)
-        ->where('fee_category_id', $request->fee_category_id)
         ->where('grade_id', $request->grade)
         ->where('class_id', $request->class)
         ->first();
-        
-      return view('backend.student.student_fee.studentfee_pdf', $data);
 
-              $pdf = PDF::loadView('backend.student.student_fee.studentfee_pdf', $data);
-              
-                return $pdf->download('pdf_file.pdf');
+        return view('backend.student.student_fee.studentfee_pdf', $data);
 
-
-        }
+    }
 
 
 
     public function ExamFeeSearch(Request $request){
             
-           
+
            $output[] = '';
 
-            $alldata = StudentPayment::where('class_id', $request->class_id)
-            ->where('grade_id', $request->grade)
-            ->where('fee_category_id', $request->selectfee)
-            ->get();
+            $amount = FeeCategoryAmount::where('student_fee_id', $request->selectfee)
+            ->where('class_id', $request->class_id)
+            ->first()->amount;
 
+           $alldata = AssignStudent::where('grade_id',$request->grade)->where('class_id', $request->class_id)->get();
                 foreach($alldata as $row){
 
                     $color= 'primary';
@@ -204,12 +203,12 @@ class StudentFeeAmountController extends Controller
                     <tr>
                         <td>'.$row->student->id_no.'</td>
                         <td>'.$row->student->name.'</td>
-                        <td>'.'₱'.$row->amount.'</td>
-                        <td>'.$row->discount.'%'.'</td>
-                        <td>'.'₱'.$row->amount.'</td>
+                        <td>'.'₱'.number_format($amount,2).'</td>
+                        <td>'.'0'.'</td>
+                        <td>'.'₱'.number_format($amount,2).'</td>
                         <td>
-                       <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("exam.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'&exam='.$request->exam_id.'"> Fee Slip</a>
-
+                           <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("exam.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$request->selectfee.'&grade='.$row->grade_id.'&class='.$row->class_id.'&exam='.$request->exam_id.'"> Fee Slip
+                           </a>
                         </td>
                     </tr>
                     ';
@@ -229,28 +228,25 @@ class StudentFeeAmountController extends Controller
 
 
 
-
-
-
-
-        public function ExamFeePayslip(Request $request){
+    public function ExamFeePayslip(Request $request){
             
         $data['exam'] = $request->exam;    
         
+        $data['fee_category_id'] = $request->fee_category_id; 
+
+        $data['amount'] = FeeCategoryAmount::where('student_fee_id', $request->fee_category_id)
+            ->where('class_id', $request->class)
+            ->first()->amount;
+
         $data['details'] = StudentPayment::where('student_id',$request->student_id)
-        ->where('fee_category_id', $request->fee_category_id)
         ->where('grade_id', $request->grade)
         ->where('class_id', $request->class)
         ->first();
-        
-      return view('backend.student.student_fee.studentfee_pdf', $data);
 
-              $pdf = PDF::loadView('backend.student.student_fee.studentfee_pdf', $data);
-              
-                return $pdf->download('pdf_file.pdf');
+        return view('backend.student.student_fee.studentfee_pdf', $data);
 
 
-        }
+    }
 
 
 
@@ -259,7 +255,7 @@ class StudentFeeAmountController extends Controller
 
 
 
-        public function LiveSearchAction(Request $request){
+    public function LiveSearchAction(Request $request){
 
                 // make this variable empty first later on we will pass data here
             $total_row = '';
@@ -304,7 +300,7 @@ class StudentFeeAmountController extends Controller
                         <td>'.$row->student->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
-                        <td>'.'₱'.$total.'</td>
+                        <td>'.'₱'.number_format($total,2).'</td>
                         <td>
                        <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'"> Fee Slip</a>
 
@@ -358,7 +354,7 @@ class StudentFeeAmountController extends Controller
                         <td>'.$row->student->name.'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
-                        <td>'.'₱'.$total.'</td>
+                        <td>'.'₱'.number_format($total,2).'</td>
                         <td>
                        <a class="btn btn-sm btn-'.$color.'" target="_blanks" href="'.route("registration.fee.payslip").'?student_id='.$row->student_id.'&fee_category_id='.$row->fee_category_id.'&grade='.$row->grade_id.'&class='.$row->class_id.'"> Fee Slip</a>
 
@@ -457,12 +453,12 @@ class StudentFeeAmountController extends Controller
 
             
 
-        }
+    }//livesearchaction
 
 
 
 
-        public function LiveSearch_Month_Exam_Payslip(Request $request){
+    public function LiveSearch_Month_Exam_Payslip(Request $request){
         $data['exam'] = $request->exam;
         $data['month'] = $request->month;    
         
@@ -472,14 +468,14 @@ class StudentFeeAmountController extends Controller
         ->where('class_id', $request->class)
         ->first();
         
-      return view('backend.student.student_fee.studentfee_pdf', $data);
+        return view('backend.student.student_fee.studentfee_pdf', $data);
 
               $pdf = PDF::loadView('backend.student.student_fee.studentfee_pdf', $data);
               
                 return $pdf->download('pdf_file.pdf');
 
 
-        }
+    }
 
 
 

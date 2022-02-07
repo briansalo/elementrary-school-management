@@ -41,13 +41,13 @@
 <p>Phone : 343434343434</p>
 <p>Email : support@easylerningbd.com</p>
 
-@if($details->fee_category_id == '2')
+@if($fee_category_id == '2')
 <p> <b> Student Registration Fee</b> </p>
 
-@elseif ($details->fee_category_id == '3')
+@elseif ($fee_category_id == '3')
 <p> <b> Exam Fee</b> </p>
 
-@elseif ($details->fee_category_id == '4')
+@elseif ($fee_category_id == '4')
 <p> <b> Monthly Fee</b> </p>
 
 @endif
@@ -78,56 +78,57 @@
 
   <tr>
     <td>3</td>
-    <td><b>Father's Name</b></td>
-    <td>{{ $details['student']['fathers_name'] }}</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td><b>Session</b></td>
+    <td><b>Grade</b></td>
     <td>{{ $details['student_grade']['name'] }}</td>
   </tr>
   <tr>
-    <td>5</td>
+    <td>4</td>
     <td><b>Class </b></td>
     <td>{{ $details['student_class']['name'] }}</td>
   </tr>
-  <tr>
-    <td>6</td>
-    <td><b>Registration Fee</b></td>
-    <td>₱{{ $details->amount }}</td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td><b>Discount Fee </b></td>
-    <td>{{$details->discount}}%</td>
-  </tr>
 
-  @if($details->fee_category_id == '2'))
+  @if($fee_category_id == '2'))
     <tr>
-    <td>8</td>
-    <td><b>Total Fee For this Student </b></td>
-    <td> ₱{{$computation}}</td>
-  </tr>
-  @else
+      <td>5</td>
+      <td><b>Registration Fee</b></td>
+      <td>₱{{ number_format($details->amount,2) }}</td>
+    </tr>
     <tr>
-    <td>8</td>
+      <td>6</td>
+      <td><b>Discount Fee </b></td>
+      <td>{{$details->discount}}%</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><b>Total Amount</b></td>
+      <td>{{number_format($computation,2)}}</td>
+    </tr>
+  @endif
 
-    @if($details->fee_category_id == '4')
-    <td><b>Total Fee For the month of {{$month}} </b></td>
-    @else
-        <td><b>Total Fee For {{$exam}} Exam </b></td>
-    @endif
+  @if($fee_category_id == '3'))
+    <tr>
+      <td>5</td>
+      <td><b>Total fee for the {{$exam}} exam </b></td>
+      <td> ₱{{number_format($amount,2)}}</td>
+    </tr>
+  @endif
 
-    <td> ₱{{$details->amount}}</td>
-  </tr>
- @endif
-    
-   
+  @if($fee_category_id == '4')
+    <tr>
+      <td>5</td>
+      <td><b>Total Fee For the month of {{$month}} </b></td>
+      <td>{{$amount}}</td>
+    </tr>
+  @endif
+ 
 </table>
+
 <br> <br>
   <i style="font-size: 10px; float: right;">Print Data : {{ date("d M Y") }}</i>
 
 <hr style="border: dashed 2px; width: 95%; color: #000000; margin-bottom: 50px">
+
+
 
 <table id="customers">
   <tr>
@@ -148,51 +149,53 @@
 
   <tr>
     <td>3</td>
-    <td><b>Father's Name</b></td>
-    <td>{{ $details['student']['fathers_name'] }}</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td><b>Session</b></td>
+    <td><b>Grade</b></td>
     <td>{{ $details['student_grade']['name'] }}</td>
   </tr>
   <tr>
-    <td>5</td>
+    <td>4</td>
     <td><b>Class </b></td>
     <td>{{ $details['student_class']['name'] }}</td>
   </tr>
-  <tr>
-    <td>6</td>
-    <td><b>Registration Fee</b></td>
-    <td>₱{{ $details->amount }}</td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td><b>Discount Fee </b></td>
-    <td>{{$details->discount}}%</td>
-  </tr>
 
-  @if($details->fee_category_id == '2'))
+  @if($fee_category_id == '2'))
     <tr>
-    <td>8</td>
-    <td><b>Total Fee For the month Student </b></td>
-    <td> ₱{{$computation}}</td>
-  </tr>
-  @else
+      <td>5</td>
+      <td><b>Registration Fee</b></td>
+      <td>₱{{ number_format($details->amount,2) }}</td>
+    </tr>
     <tr>
-    <td>8</td>
-    @if($details->fee_category_id == '4')
-    <td><b>Total Fee For the month of {{$month}} </b></td>
-    @else
-        <td><b>Total Fee For {{$exam}} Exam </b></td>
-    @endif
-    <td> ₱{{$details->amount}}</td>
-  </tr>
- @endif
-  
-    
-   
+      <td>6</td>
+      <td><b>Discount Fee </b></td>
+      <td>{{$details->discount}}%</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><b>Total Amount</b></td>
+      <td>{{number_format($computation,2)}}</td>
+    </tr>
+  @endif
+
+  @if($fee_category_id == '3'))
+    <tr>
+      <td>5</td>
+      <td><b>Total fee for the {{$exam}} exam </b></td>
+      <td> ₱{{number_format($amount,2)}}</td>
+    </tr>
+  @endif
+
+  @if($fee_category_id == '4')
+    <tr>
+      <td>5</td>
+      <td><b>Total Fee For the month of {{$month}} </b></td>
+      <td>{{$amount}}</td>
+    </tr>
+  @endif
+ 
 </table>
+
+
+
 <br> <br>
   <i style="font-size: 10px; float: right;">Print Data : {{ date("d M Y") }}</i>
 
