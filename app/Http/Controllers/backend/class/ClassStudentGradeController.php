@@ -59,7 +59,7 @@ class ClassStudentGradeController extends Controller
       $get_student = ClassStudentGrade::select('student_id')
       ->groupBy('student_id')
       ->where('employee_id', $request->select_name)
-      ->orderBy('created_at','ASC')
+      ->orderBy('created_at','asc')
       ->get();
 
       dd($get_student);
