@@ -59,9 +59,8 @@ class ClassStudentGradeController extends Controller
       $get_student = ClassStudentGrade::select('student_id')
       ->groupBy('student_id')
       ->where('employee_id', $request->select_name)
-      ->latest();
+      ->get();
 
-      //dd($get_student);
      foreach($get_student as $row){
 
           $get_grade=[];
