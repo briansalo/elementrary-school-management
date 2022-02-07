@@ -15,7 +15,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Student Grade List</h3>
+				  <h3 class="box-title">School Grade List</h3>
 				  <a href="{{route('student.grade.add')}}" style="float: right;" class="btn btn-rounded btn-success mb-5"> Add Student Grade </a>	
 				</div>
 				<!-- /.box-header -->

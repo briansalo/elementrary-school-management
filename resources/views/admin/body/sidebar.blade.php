@@ -62,10 +62,10 @@
             -->
             <li><a href="{{route('student.grade.view')}}"><i class="ti-more"></i>School Grade</a></li>
             <li><a href="{{route('school.subject.view')}}"><i class="ti-more"></i>School Subject</a></li>
-            <li><a href="{{route('designation.view')}}"><i class="ti-more"></i>Designation</a></li>
-            <li><a href="{{route('student.fee.view')}}"><i class="ti-more"></i>Student Fee</a></li>
+            <li><a href="{{route('student.fee.view')}}"><i class="ti-more"></i>School Fee</a></li>
             <li><a href="{{route('assign.grade.view')}}"><i class="ti-more"></i>Assign Grade</a></li>
-            <li><a href="{{route('category.amount.view')}}"><i class="ti-more"></i>Fee Category Amount</a></li>
+            <li><a href="{{route('category.amount.view')}}"><i class="ti-more"></i>Assign School Fee</a></li>
+            <li><a href="{{route('designation.view')}}"><i class="ti-more"></i>Designation</a></li>
           </ul>
         </li>
 		  

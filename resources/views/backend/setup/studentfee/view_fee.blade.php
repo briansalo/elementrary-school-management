@@ -15,7 +15,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Student Fee List</h3>
+				  <h3 class="box-title">School Fee List</h3>
 				  <!--
 				  <a href="{{route('student.fee.add')}}" style="float: right;" class="btn btn-rounded btn-success mb-5"> Add Fee Category </a>
 				-->
