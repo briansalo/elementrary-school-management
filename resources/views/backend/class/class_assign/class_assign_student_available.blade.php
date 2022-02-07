@@ -30,11 +30,11 @@
 		  		@foreach($alldata as $key => $student)
 		  		<div class="col-md-4">
 						<div class="media align-items-center bg-white mb-20">
-
+									<!---
 								 			<a href="#" class="avatar avatar-lg ">
 											<img id="showimage" src="{{ (!empty($student['student']['image']))? url('upload/student_images/'.$student['student']['image']): url('upload/no_image.jpg')}}" alt="User Avatar" style="width:80px; width: 80px;">
 										  </a>
-										  
+										-->  
 							  <div class="media-body">
 										<h3 style="color:black;"><strong>{{$student->student->name}}</strong></h3>
 										<p>{{ $student->student_grade->name }} {{ $student->student_class->name }}</p>
