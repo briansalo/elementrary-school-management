@@ -20,6 +20,7 @@ class AdminTableSeeder extends Seeder
             $user = array(
                 array('id' => 1, 'usertype'=>'Admin', 'name'=>'admin',  'email'=>'admin@admin.com', 'email_verified_at'=> now(), 'password'=> bcrypt('adminadmin') ),
                 
+                );
                 DB::table('users')->insert($user);
     }
 
