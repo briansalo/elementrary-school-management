@@ -63,7 +63,7 @@
 				<tr>
 						<input type="hidden" name="employee_id[]" id="employee_id" value="{{$data->user->id}}">
 							<td>{{ $key+1 }}</td>
-							<td>{{$data->user->name}}</td>
+							<td>{{ucwords($data->user->name)}}</td>
 
 							<td>
 									<!-- this div will place the radio button to horizantal line  -->

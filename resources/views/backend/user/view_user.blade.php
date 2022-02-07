@@ -36,7 +36,7 @@
 							<tr>
 								<td>{{ $key+1 }}</td>
 								<td>{{$user->usertype}}</td>
-								<td>{{ $user->name }}</td>
+								<td>{{ucwords( $user->name) }}</td>
 								<td>{{ $user->email }}</td>
 								<td>{{ $user->code }}</td>
 								<td>

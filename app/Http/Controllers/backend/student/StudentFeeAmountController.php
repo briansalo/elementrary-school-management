@@ -58,7 +58,7 @@ class StudentFeeAmountController extends Controller
                     $output[]= '
                     <tr>
                         <td>'.$row->student->id_no.'</td>
-                        <td>'.$row->student->name.'</td>
+                        <td>'.ucwords($row->student->name).'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.number_format($total,2).'</td>
@@ -136,7 +136,7 @@ class StudentFeeAmountController extends Controller
                     $output[]= '
                     <tr>
                         <td>'.$row->student->id_no.'</td>
-                        <td>'.$row->student->name.'</td>
+                        <td>'.ucwords($row->student->name).'</td>
                         <td>'.'₱'.number_format($amount,2).'</td>
                         <td>'.'0'.'</td>
                         <td>'.'₱'.number_format($amount,2).'</td>
@@ -202,7 +202,7 @@ class StudentFeeAmountController extends Controller
                     $output[]= '
                     <tr>
                         <td>'.$row->student->id_no.'</td>
-                        <td>'.$row->student->name.'</td>
+                        <td>'.ucwords($row->student->name).'</td>
                         <td>'.'₱'.number_format($amount,2).'</td>
                         <td>'.'0'.'</td>
                         <td>'.'₱'.number_format($amount,2).'</td>
@@ -297,7 +297,7 @@ class StudentFeeAmountController extends Controller
                     $output[]= '
                     <tr>
                         <td>'.$row->student->id_no.'</td>
-                        <td>'.$row->student->name.'</td>
+                        <td>'.ucwords($row->student->name).'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.number_format($total,2).'</td>
@@ -351,7 +351,7 @@ class StudentFeeAmountController extends Controller
                     $output[]= '
                     <tr>
                         <td>'.$row->student->id_no.'</td>
-                        <td>'.$row->student->name.'</td>
+                        <td>'.ucwords($row->student->name).'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.number_format($total,2).'</td>
@@ -392,7 +392,7 @@ class StudentFeeAmountController extends Controller
                     $output[]= '
                     <tr>
                         <td>'.$row->student->id_no.'</td>
-                        <td>'.$row->student->name.'</td>
+                        <td>'.ucwords($row->student->name).'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$row->amount.'</td>
@@ -425,7 +425,7 @@ class StudentFeeAmountController extends Controller
                     $output[] = '
                     <tr>
                         <td>'.$row->student->id_no.'</td>
-                        <td>'.$row->student->name.'</td>
+                        <td>'.ucwords($row->student->name).'</td>
                         <td>'.'₱'.$row->amount.'</td>
                         <td>'.$row->discount.'%'.'</td>
                         <td>'.'₱'.$row->amount.'</td>

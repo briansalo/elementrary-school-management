@@ -53,7 +53,7 @@ class EmployeeMonthlySalaryController extends Controller
                             $output[]= '
                             <tr>
                                 <td>'.$row->user->id_no.'</td>
-                                <td>'.$row->user->name.'</td>
+                                <td>'.ucwords($row->user->name).'</td>
                                 <td>'."₱".number_format($row->user->salary,).'</td>
                                 <td>'.$attendance->count().'</td>
                                 <td>'."₱".number_format($attendance->count()*$row->user->salary,).'</td>

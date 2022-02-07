@@ -91,7 +91,7 @@
 							<tr>
 								<td>{{ $key+1 }}</td> 
 								<td>{{ $student['student']['id_no'] }}</td>
-								<td>{{ $student['student']['name'] }}</td> <!-- THE [student] methhod came from the model -->
+								<td>{{ ucwords($student['student']['name']) }}</td> <!-- THE [student] methhod came from the model -->
 								<!--
 								<td>
 								  <img id="showimage" src="{{ (!empty($student['student']['image']))? url('upload/student_images/'.$student['student']['image']): url('upload/no_image.jpg')}}" alt="User Avatar" style="width:80px; width: 80px;">

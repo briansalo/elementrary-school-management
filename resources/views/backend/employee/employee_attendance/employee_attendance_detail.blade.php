@@ -62,7 +62,7 @@
 								@foreach($detail as $key => $data)
 								<tr>
 											<td>{{ $key+1 }}</td>
-											<td>{{$data->user->name}}</td>
+											<td>{{ucwords($data->user->name)}}</td>
 											<td>{{ ($data->attendance_status == 'absent')? 'x': 'Present'}}</td>	
 											<td> {{ ($data->late == '')? " ": $data->late }}</td>
 											<td> {{ ($data->overtime == '')? " ": $data->overtime }}</td>

@@ -88,7 +88,7 @@
 																		<input type="hidden" name="class_id[]" 
 																		value="{{$data->student_class->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
-																		<td>{{$data->student->name}}</td>
+																		<td>{{ucwords($data->student->name)}}</td>
 																		<td>{{$data->student_grade->student_grade->name}}</td>
 																		<td>{{$data->student_class->student_class->name}}</td>
 
@@ -142,7 +142,7 @@
 																		<input type="hidden" name="class_id[]" 
 																		value="{{$data->student_class->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
-																		<td>{{$data->student->name}}</td>
+																		<td>{{ucwords($data->student->name)}}</td>
 																		<td>{{$data->student_grade->student_grade->name}}</td>
 																		<td>{{$data->student_class->student_class->name}}</td>
 
@@ -197,7 +197,7 @@
 																		<input type="hidden" name="class_id[]" 
 																		value="{{$data->student_class->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
-																		<td>{{$data->student->name}}</td>
+																		<td>{{ucwords($data->student->name)}}</td>
 																		<td>{{$data->student_grade->student_grade->name}}</td>
 																		<td>{{$data->student_class->student_class->name}}</td>
 
@@ -255,7 +255,7 @@
 																		<input type="hidden" name="class_id[]"
 																		 value="{{$data->student_class->student_class->id}}">
 																		<td>{{$data->student->id_no}}</td>
-																		<td>{{$data->student->name}}</td>
+																		<td>{{ucwords($data->student->name)}}</td>
 																		<td>{{$data->student_grade->student_grade->name}}</td>
 																		<td>{{$data->student_class->student_class->name}}</td>
 
@@ -304,7 +304,7 @@
 																@foreach($students as $key => $data)
 																	<tr>
 																		<td>{{$data->student->id_no}}</td>
-																		<td>{{$data->student->name}}</td>
+																		<td>{{ucwords($data->student->name)}}</td>
 																		<td>{{$data->student_grade->student_grade->name}}</td>
 																		<td>{{$data->student_class->student_class->name}}</td>												
 

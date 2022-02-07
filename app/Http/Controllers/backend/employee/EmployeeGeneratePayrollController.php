@@ -174,7 +174,7 @@ public function EmployeeSalaryDateFromToSearch(Request $request){
                     $output[]= '
                     <tr>
                        
-                        <td>'.$row->user->name.'</td>
+                        <td>'.ucwords($row->user->name).'</td>
                         <td>'."From ".$firstdate->date." To ".$lastdate->date.'</td>
                         <td>'."₱".number_format($salary,).'</td>
                         <td>'.$no_of_days.'</td>
@@ -182,7 +182,7 @@ public function EmployeeSalaryDateFromToSearch(Request $request){
                         <td>'. number_format($late, 2).'</td>
                         <td>'. $overtime.'</td>
                         <td>'. $deduction."$month".'</td>
-                        <td>'."₱".$total.'</td>
+                        <td>'."₱".number_format($total,2).'</td>
                         
                      </tr>
                     ';

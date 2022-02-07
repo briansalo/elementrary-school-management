@@ -44,7 +44,7 @@
 								
 									<td>{{ $key+1 }}</td> 
 									<td>{{ $employee->employee->id_no }}</td>
-									<td>{{ $employee->employee->name }}</td>
+									<td>{{ ucwords($employee->employee->name) }}</td>
 									<!--
 									<td>
 									  <img id="showimage" src="{{ (!empty($employee->employee->image))? url('upload/employee_images/'.$employee->employee->image): url('upload/no_image.jpg')}}" alt="User Avatar" style="width:80px; width: 80px;">
