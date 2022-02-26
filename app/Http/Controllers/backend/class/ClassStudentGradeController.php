@@ -68,7 +68,7 @@ class ClassStudentGradeController extends Controller
           $get_grade=[];
                //get all the subject for this grade and class
            foreach($data['subjects'] as $row_three){    
-                 $get_subject =$row_three->school_subject->id;
+                 $get_subject =$row_three->subject_id;
 
                      $student_subject= ClassStudentGrade::where('student_id', $row->student_id)->where('subject',$get_subject)->get();
 
