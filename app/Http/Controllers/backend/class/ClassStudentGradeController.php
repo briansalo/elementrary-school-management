@@ -38,6 +38,7 @@ class ClassStudentGradeController extends Controller
         join('assign_students', 'assign_classes.student_id','=','assign_students.student_id')
         ->where('assign_classes.employee_id',$request->select_name)
         ->where('assign_students.class_status','1')
+        ->orderBy('assign_classes.student_id', 'asc')
         ->get();
 
           // this will retrieve the grade in every student by grading
@@ -59,6 +60,7 @@ class ClassStudentGradeController extends Controller
       $get_student = ClassStudentGrade::select('student_id')
       ->groupBy('student_id')
       ->where('employee_id', $request->select_name)
+      ->orderBy('student_id', 'asc')
       ->get();
 
      foreach($get_student as $row){
